@@ -1,16 +1,16 @@
 <?php
-
-// REGISTER
-// - Filtrer (sanitize) les champs du formulaire
-// - Si valides, vérifier que le mail n'existe pas deja (sinon, msg d'erreur)
-// - Pareil pour pseudo
-// - Verifier que les 2 mdp sont identiques
-// - Si oui, hash mdp
-// - Ajouter utilisateur à la BDD
+session_start();
 
 if(isset($_GET["action"])){
     switch($_GET["action"]){
         case "register":
+            // REGISTER
+            // - Filtrer (sanitize) les champs du formulaire
+            // - Si valides, vérifier que le mail n'existe pas deja (sinon, msg d'erreur)
+            // - Pareil pour pseudo
+            // - Verifier que les 2 mdp sont identiques
+            // - Si oui, hash mdp
+            // - Ajouter utilisateur à la BDD
             if($_POST["submit"]){
                 $pdo = new \PDO("mysql:host=localhost;dbname=php_hash;charset=utf8", "root","");
                 
@@ -106,8 +106,8 @@ if(isset($_GET["action"])){
                         // - password_verify le mdp
                         if($hash == password_verify($password, $hash)) {
                             // - Si ok, connexion, passer utilisateur en session
-                            echo "yay";
-    
+                            $_SESSION['user'] = $user;
+                            header("Location: home.php"); exit;
                         } else {
                             // Mauvais mdp
                             header("Location: login.php"); exit;
@@ -116,9 +116,17 @@ if(isset($_GET["action"])){
                         // Mauvais email
                         header("Location: login.php"); exit;
                     }
+                } else {
+                    // Mauvais inputs
+                    header("Location: login.php"); exit;
                 }
             }
             header("Location: login.php"); exit;
+            break;
+
+            case "logout":
+                unset($_SESSION['user']);
+                header("Location: home.php"); exit;
             break;
     }
 }

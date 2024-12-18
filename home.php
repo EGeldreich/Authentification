@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Accueil</h1>
+    <?php if(isset($_SESSION['user'])){ ?>
+        <a href="traitement.php?action=logout">Se déconnecter</a>
+    <?php } else { ?>
+        <a href="traitement.php?action=login">Se connecter</a>
+        <a href="traitement.php?action=register">S'enregistrer</a>
+    <?php } ?>
 
-    
+    <h1>Accueil</h1>
+    <?php if(isset($_SESSION['user'])){ ?>
+        <p>Bonjour <?= $_SESSION['user']['pseudo'] ?>
+    <?php } ?>
 </body>
 </html>

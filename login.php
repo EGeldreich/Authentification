@@ -14,7 +14,7 @@
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password"><br>
 
-        <input type="submit" value="Se connecter">
+        <input type="submit" name="submit" value="Se connecter">
     </form>
 </body>
 </html>

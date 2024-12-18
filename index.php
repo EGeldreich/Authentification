@@ -42,3 +42,20 @@ if(password_verify($saisie, $hash)){
 } else {
     echo "not all good.";
 }
+
+// REGISTER
+// - Filtrer (sanitize) les champs du formulaire
+// - Si valides, vérifier que le mail n'existe pas deja (sinon, msg d'erreur)
+// - Pareil pour pseudo
+// - Verifier que les 2 mdp sont identiques
+// - Si oui, hash mdp
+// - Ajouter utilisateur à la BDD
+
+// LOGIN
+// - Filtrer champs formulaire
+// - Si valides, retrouver utilisateur et mdp lié à l'adresse mail
+// - Si trouvé, récupérer le hash
+// - password_verify le mdp
+// - Si ok, connexion, passer utilisateur en session
+// - Erreur à chacune de ses étapes si pas ok
+
